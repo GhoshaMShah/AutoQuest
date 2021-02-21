@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='myStyle.css') }}">
+<style type="text/css">
+	.myStyle
+{
+  
+  position: relative;
+  margin-top: 20px;
+  margin-left: 15px;
+  margin-bottom: 20px;
+  margin-right: 15px;
+  padding: 5px;
+  font-size: 20px;
+  
+
+
+}
+</style>
+    <h1>Contact Us</h1>
+    <br><br><hr>
+
+    
+   <div class="myStyle">
+   	<br><br>
+    &#9993; :
+    &nbsp; &nbsp; 
+    ghoshar99@gmail.com
+    <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+    <a href="mailto:ghoshar99@gmail.com">Send Email</a>
+    
+
+    <br><br>
+    &#9743; : 
+    &nbsp; &nbsp; 7600052854
+    <br>
+    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+    <a href="tel:7600052854">Call now</a>
+   </div>
+   <br><br><hr>
+
+
+
+   
+{% endblock content %}

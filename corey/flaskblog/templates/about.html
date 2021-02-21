@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='myStyle.css') }}">
+<style type="text/css">
+	.myStyle
+{
+  
+  position: relative;
+  margin-top: 20px;
+  margin-left: 15px;
+  margin-bottom: 20px;
+  margin-right: 15px;
+  padding: 5px;
+  font-size: 20px;
+  
+
+
+}
+.body
+{
+	background-color: coral;
+}
+
+</style>
+    <h1>About AutoQuest</h1>
+<br><br><hr>
+   <div class="myStyle">
+   	<br><br>
+   	We have built an AutoQuest system for generating an automatic question paper.
+   	<br><br>
+   	Once you register yourself, you can login into your AutoQuest account, provide your questions and get an automatic question paper ! 📃 🤩
+   </div>
+
+<br><br><hr>
+   
+{% endblock content %}
+
+

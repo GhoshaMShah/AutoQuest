@@ -1,0 +1,124 @@
+from flask import Flask, render_template, request, redirect, url_for, flash
+from flask_mysqldb import MySQL
+#from selenium import webdriver
+#from selenium.webdriver.support.ui import Select
+import js2py
+import tkinter
+from tkinter import messagebox
+
+# hide main window
+
+
+
+
+
+app = Flask(__name__)
+app.secret_key = 'many random bytes'
+
+app.config['MYSQL_HOST'] = 'localhost'
+app.config['MYSQL_USER'] = 'root'
+app.config['MYSQL_PASSWORD'] = ''
+app.config['MYSQL_DB'] = 'mydatabase'
+
+mysql = MySQL(app)
+
+
+
+@app.route('/account')
+def Index():
+    cur = mysql.connection.cursor()
+    cur.execute("SELECT * FROM questions")
+    data = cur.fetchall()
+    cur.close()
+    return render_template('index2.html', questions=data )
+
+
+
+@app.route('/insert', methods = ['POST'])
+def insert():
+
+    if request.method == "POST":
+        flash("Question Inserted Successfully")
+        #driver = webdriver.Chrome(executable_path="E:/darshan sem 7/project/flaskTutorial/flaskAutoQuestCRUD/chromedriver.exe")
+        #driver = webdriver.get("file:///E:/darshan%20sem%207/project/flaskTutorial/flaskAutoQuestCRUD/templates/addstudent.html")
+        #element = driver.find_element_by_id("semesterDropDown")
+        #drp = Select(element)
+        #semester = drp.first_selected_option.text
+        #print(select.first_selected_option.text)
+        #print(select.first_selected_option.get_attribute("value"))
+        
+
+        
+        semester = int(request.form.get('semester'))
+        subject = request.form['subject']
+        #marks = int(request.form['marks'])
+        #difficultyLevel = request.form['difficultyLevel']
+        marks = int(request.form['marks'])
+        
+        difficultyLevel = request.form.get('difficultyLevel')
+        
+        question = request.form['question']
+        if question==" ":
+            root = tkinter.Tk()
+            root.withdraw()
+
+# message box display
+            messagebox.showerror("Error", "Please insert the question")
+        else:
+            cur = mysql.connection.cursor()
+            cur.execute("INSERT INTO questions (Semester,Subject,Marks,Difficulty_level,Question) VALUES (%s, %s, %s , %s, %s)", (semester,subject,marks,difficultyLevel,question))
+            mysql.connection.commit()
+            return redirect(url_for('Index'))
+
+
+        
+        
+
+
+
+
+@app.route('/delete/<string:id_data>', methods = ['GET'])
+def delete(id_data):
+    flash("Question Has Been Deleted Successfully")
+    cur = mysql.connection.cursor()
+    cur.execute("DELETE FROM questions WHERE id=%s", (id_data,))
+    mysql.connection.commit()
+    return redirect(url_for('Index'))
+
+
+
+
+
+@app.route('/update',methods=['POST','GET'])
+def update():
+
+    if request.method == 'POST':
+        id_data = request.form['id']
+        
+        #semester = request.form.select['semester']
+        semester = int(request.form.get('semester'))
+
+        subject = request.form['subject']
+        marks = request.form['marks']
+        difficultyLevel = request.form.get('difficultyLevel')
+        question = request.form['question']
+        cur = mysql.connection.cursor()
+        cur.execute("""
+               UPDATE questions
+               SET Semester=%s, Subject=%s, Marks=%s, Difficulty_level=%s, Question=%s
+               WHERE id=%s
+            """, (semester,subject,marks,difficultyLevel,question, id_data))
+        flash("Question Updated Successfully")
+        mysql.connection.commit()
+        return redirect(url_for('Index'))
+
+
+
+
+
+
+
+
+
+if __name__ == "__main__":
+    app.run(debug=True)

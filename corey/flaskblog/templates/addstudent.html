@@ -1,0 +1,95 @@
+{% include "header.html" %}
+
+
+{% block body %}
+
+
+<div class="panel=heading">
+
+<h2>Add Question <a class="pull-right btn btn-success" href="/">Back</a> </h2>
+
+
+</div>
+
+
+
+<div class="panel-body">
+
+<form action="{{ url_for('processtudent') }}" method="post">
+<div class="form-group">
+
+    <label for="name">Semester:</label>
+    <select name="semesterDropDown" id="semesterDropDown" size="4">
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
+    <option value="6">6</option>
+    <option value="7">7</option>
+    <option value="8">8</option>
+
+    </select>
+
+</div>
+
+    <div class="form-group">
+
+    <label for="name">Subject:</label>
+    <input type="text" class="form-control" name="subject" id="subject" required = "1" >
+
+</div>
+
+<div class="form-group">
+
+    <label for="name">Marks:</label>
+    <input type="number" class="form-control" name="marks" id="marks" required = "1"  >
+
+</div>
+
+</div>
+
+    <div class="form-group">
+
+    &nbsp;&nbsp;<label for="name">Difficulty level:</label><br>&nbsp;&nbsp;
+    Easy <input type="radio" name="difficultyLevel" id="easy" value="easy" checked>&nbsp;&nbsp;&nbsp;
+    Average <input type="radio" name="difficultyLevel" id="average" value="average">&nbsp;&nbsp;&nbsp;
+    Difficult <input type="radio" name="difficultyLevel" id="difficult" value="difficult">
+
+
+</div>
+
+
+<div class="form-group">
+	&nbsp;&nbsp;<label for="name">Question:</label>
+
+<textarea id="question" name="question" rows="4" cols="50" placeholder="Add question here">
+
+</textarea>
+</div>
+
+
+    <div class="form-group">
+        <input type="hidden" name="id" value="1">
+
+     <input type="hidden" name="action" value="edit">
+     <input type="submit" class="btn btn-success" name="submit" value="Add Question">
+
+</div>
+
+
+</form>
+
+
+</div>
+
+
+
+{% endblock %}
+
+
+
+
+<br><br><br>
+
+{% include "footer.html" %}
